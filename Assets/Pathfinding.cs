@@ -2,28 +2,29 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Pathfinding : MonoBehaviour
 {
-    private List<Vector2Int> path = new List<Vector2Int>();
-    private Vector2Int start = new Vector2Int(0, 1);
-    private Vector2Int goal = new Vector2Int(4, 4);
-    private Vector2Int next;
-    private Vector2Int current;
-    private Vector2Int[] directions = new Vector2Int[]
+    private List<Vector3Int> path = new List<Vector3Int>();
+    public Vector3Int start = new Vector3Int(0, 1);
+    public Vector3Int goal = new Vector3Int(4, 4);
+    private Vector3Int next;
+    private Vector3Int current;
+    private Vector3Int[] directions = new Vector3Int[]
     {
-new Vector2Int(1, 0),
-new Vector2Int(-1, 0),
-new Vector2Int(0, 1),
-new Vector2Int(0, -1)
+        new Vector3Int(1, 0),
+        new Vector3Int(-1, 0),
+        new Vector3Int(0, 1),
+        new Vector3Int(0, -1)
     };
     private int[,] grid = new int[,]
     {
-{ 0, 1, 0, 0, 0 },
-{ 0, 1, 0, 1, 0 },
-{ 0, 0, 0, 1, 0 },
-{ 0, 1, 1, 1, 0 },
-{ 0, 0, 0, 0, 0 }
+        { 0, 1, 0, 0, 0 },
+        { 0, 1, 0, 1, 0 },
+        { 0, 0, 0, 1, 0 },
+        { 0, 1, 1, 1, 0 },
+        { 0, 0, 0, 0, 0 }
     };
     private void Start()
     {
+        
         FindPath(start, goal);
     }
     private void OnDrawGizmos()
@@ -56,17 +57,17 @@ new Vector2Int(0, -1)
         Gizmos.DrawCube(new Vector3(goal.x * cellSize, 0, goal.y * cellSize), new
         Vector3(cellSize, 0.1f, cellSize));
     }
-    private bool IsInBounds(Vector2Int point)
+    private bool IsInBounds(Vector3Int point)
     {
         return point.x >= 0 && point.x < grid.GetLength(1) && point.y >= 0 &&
         point.y < grid.GetLength(0);
     }
-    private void FindPath(Vector2Int start, Vector2Int goal)
+    private void FindPath(Vector3Int start, Vector3Int goal)
     {
-        Queue<Vector2Int> frontier = new Queue<Vector2Int>();
+        Queue<Vector3Int> frontier = new Queue<Vector3Int>();
         frontier.Enqueue(start);
-        Dictionary<Vector2Int, Vector2Int> cameFrom = new Dictionary<Vector2Int,
-        Vector2Int>();
+        Dictionary<Vector3Int, Vector3Int> cameFrom = new Dictionary<Vector3Int,
+        Vector3Int>();
         cameFrom[start] = start;
         while (frontier.Count > 0)
         {
@@ -75,7 +76,7 @@ new Vector2Int(0, -1)
             {
                 break;
             }
-            foreach (Vector2Int direction in directions)
+            foreach (Vector3Int direction in directions)
             {
                 next = current + direction;
                 if (IsInBounds(next) && grid[next.y, next.x] == 0 && !
@@ -92,7 +93,7 @@ new Vector2Int(0, -1)
             return;
         }
         // Trace path from goal to start
-        Vector2Int step = goal;
+        Vector3Int step = goal;
         while (step != start)
         {
             path.Add(step);
