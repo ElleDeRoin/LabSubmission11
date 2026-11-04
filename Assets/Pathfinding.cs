@@ -7,6 +7,9 @@ public class Pathfinding : MonoBehaviour
     public Vector3Int goal = new Vector3Int(4, 4);
     private Vector3Int next;
     private Vector3Int current;
+    public int width = 5;
+    public int height = 5;
+    public float obstacleProbability = 0.2f;
     private Vector3Int[] directions = new Vector3Int[]
     {
         new Vector3Int(1, 0),
@@ -26,6 +29,7 @@ public class Pathfinding : MonoBehaviour
     {
         
         FindPath(start, goal);
+        GenerateRandomGrid(width, height, obstacleProbability);
     }
     private void OnDrawGizmos()
     {
@@ -57,6 +61,20 @@ public class Pathfinding : MonoBehaviour
         Gizmos.DrawCube(new Vector3(goal.x * cellSize, 0, goal.y * cellSize), new
         Vector3(cellSize, 0.1f, cellSize));
     }
+
+    private void GenerateRandomGrid(int width, int height, float obstacleProbability)
+    {
+        grid = new int[height, width];
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                grid[y, x] = Random.value < obstacleProbability ? 1 : 0;
+            }
+        }
+    }
+
+
     private bool IsInBounds(Vector3Int point)
     {
         return point.x >= 0 && point.x < grid.GetLength(1) && point.y >= 0 &&
