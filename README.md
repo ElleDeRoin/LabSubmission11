@@ -1,5 +1,6 @@
 # Lab Submission 11
 Group Members: Elle DeRoin, Cami Alarcon-Fernandez, Lauren Holloway
+
 Video: https://youtu.be/dAl6RmhHjIw?si=sxITU_TH7ZUE_8WY
 
 How does each pathfinding algorithms calculate and prioritize paths?  
