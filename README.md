@@ -1,4 +1,7 @@
 # Lab Submission 11
+Group Members: Elle DeRoin, Cami Alarcon-Fernandez, Lauren Holloway
+
+
 How does each pathfinding algorithms calculate and prioritize paths?  
 
 BFS works on unweighted grids and uses a queue to search in layers. Every neighbor of the start first, then their neighbors, and so on until the goal is reached. The only priority is first-in, first-out, and since every step costs the same, the first time it reaches the goal is also the shortest path with the fewest steps. Dijkstra's algorithm is like BFS for weighted graphs. It always expands the node with the lowest total cost from the start, g(n), so it finds the cheapest path, but it also spreads out in every direction and spends time exploring away from the goal. A* is Dijkstra's algorithm adapted to include heuristics, so it prioritizes by f(n) = g(n) + h(n), where h(n) is an estimate of the remaining distance. Given that this estimate doesn't overestimate the distance, A* still finds the most optimal path while exploring less nodes. 
